@@ -2,5 +2,5 @@
 
 [pull requests](https://github.com/DinaSami/storefront/pulls)
 
-[deployment link]()
+[deployment link](https://store-front-deploy.netlify.app/)
 
