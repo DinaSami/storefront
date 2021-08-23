@@ -1,8 +1,8 @@
 import React from 'react';
-import './Products.css';
-import { connect } from 'react-redux';
-import { switchProducts } from '../../store/products.js';
+import './Products.scss';
+// import { switchProducts } from '../../store/action/index';
 import { makeStyles } from '@material-ui/core/styles';
+import {useSelector,useDispatch} from 'react-redux'
 import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
 import CardActions from '@material-ui/core/CardActions';
@@ -10,6 +10,7 @@ import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
+import {switchCart} from '../../store/action/index';
 
 const useStyles = makeStyles({
   root: {
@@ -20,15 +21,17 @@ const useStyles = makeStyles({
   },
 });
 
-const Products = (props) => {
+const Products = () => {
+  const state = useSelector(state => state);
+  const dispatch = useDispatch();
+
   const classes = useStyles();
   return (
     <div className="products">
-      <h2>{props.category.displayName}</h2>
-      {/* <br></br>
-      <br></br>
-      <h2 className="description">{props.category.description}</h2> */}
-        {props.products.map((product, i) => {
+      <h2 id='text'>{state.categories.activeCategory.displayName}</h2>
+      <h4 id='text'>{state.categories.activeCategory.description}</h4>
+ 
+        {state.products.products.map((product, i) => {
           return (
           <Card key={i} className={classes.root}>
           <CardActionArea>
@@ -50,7 +53,7 @@ const Products = (props) => {
             </CardContent>
           </CardActionArea>
           <CardActions>
-            <Button size="small" color="primary">
+            <Button size="small" color="primary" onClick={()=> dispatch(switchCart(product))}>
                   ADD TO CART
             </Button>
             <Button size="small" color="primary">
@@ -64,15 +67,15 @@ const Products = (props) => {
   )
 }
 
-const mapStateToProps = (state) => {
-  return {
-    products: state.products.products,
-    category: state.categories.activeCategory
-  }
-}
+// const mapStateToProps = (state) => {
+//   return {
+//     products: state.products.products,
+//     category: state.categories.activeCategory
+//   }
+// }
 
-const mapDispatchToProps = {
-  switchProducts,
-}
+// const mapDispatchToProps = {
+//   switchProducts,
+// }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Products);
+export default Products;

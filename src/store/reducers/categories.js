@@ -33,9 +33,3 @@ let categoryList = [
     }
   }
   
-  export function switchCategory(name){
-    return{
-      type: "SWITCH_ACTIVE_CATEGORY",
-      payload: name,
-    }
-  }
