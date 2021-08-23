@@ -6,15 +6,19 @@ import Products from './components/products/Products.js'
 import Categories from './components/categories/Categories.js'
 import Container from '@material-ui/core/Container';
 import store from'./store/index.js';
+import SimpleCart from './components/SimpleCart/SimpleCart'
 
 function App() {
   return (
     <Container>
       <Provider store={store()}>
-        <Header></Header>
-        <Categories></Categories>
-        <Products></Products>
-        <Footer></Footer>
+        <Header/>
+        <SimpleCart/>
+        <br></br>
+        
+        <Categories/>
+        <Products/>
+        <Footer/>
       </Provider>
     </Container>
   );

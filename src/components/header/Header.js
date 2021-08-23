@@ -1,15 +1,19 @@
 
 import React from 'react';
 import './Header.css';
-import Paper from '@material-ui/core/Paper'
+import Paper from '@material-ui/core/Paper';
+import { useSelector } from 'react-redux';
+
 
 function Header(){
+  const state = useSelector(state => state);
+
   return(
     <Paper>
-    <header className = "App-header" >
+    <header className = "header" >
       <h1>STORE APP</h1>
       <nav>
-        <p>ADD TO Cart(0)</p>
+        <p>CART ({state.cart.initialCount})</p>
       </nav>
       </header>
       </Paper>
