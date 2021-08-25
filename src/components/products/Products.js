@@ -11,7 +11,8 @@ import CardMedia from '@material-ui/core/CardMedia';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import {switchCart} from '../../store/action/index';
-
+import {getProducts} from '../../store/action/index'
+import {useEffect} from 'react'
 const useStyles = makeStyles({
   root: {
     maxWidth: 200,
@@ -25,19 +26,25 @@ const Products = () => {
   const state = useSelector(state => state);
   const dispatch = useDispatch();
 
+  useEffect(() => {
+    dispatch(getProducts())
+  },[])
   const classes = useStyles();
+
   return (
     <div className="products">
-      <h2 id='text'>{state.categories.activeCategory.displayName}</h2>
-      <h4 id='text'>{state.categories.activeCategory.description}</h4>
+      <h2 id='text'>{state.categories.filteredCtegories.name}</h2>
+      <h4 id='text'>{state.categories.filteredCtegories.description}</h4>
  
-        {state.products.products.map((product, i) => {
+        {state.products.allProducts.map((product, i) => {
           return (
+            <>
+            {(product.category === state.categories.filteredCtegories.name) &&
           <Card key={i} className={classes.root}>
           <CardActionArea>
             <CardMedia
               className={classes.media}
-              image={product.image}
+              image='https://media2.giphy.com/media/3oEjI6SIIHBdRxXI40/200w.gif?cid=82a1493b33ugpent8i3q3ttfasm2rwygvbfd85dnh2sdpji5&rid=200w.gif&ct=g'
               title="Product Picture"
             />
             <CardContent>
@@ -48,7 +55,7 @@ const Products = () => {
                 ${product.price}
               </Typography>
               <Typography gutterBottom variant="h5" component="h2">
-                IN STOCK: {product.inventory}
+                IN STOCK: {product.inStock}
               </Typography>
             </CardContent>
           </CardActionArea>
@@ -61,6 +68,9 @@ const Products = () => {
             </Button>
           </CardActions>
         </Card>
+            
+            }
+            </>
         )
       })}
   </div>

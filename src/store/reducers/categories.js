@@ -16,6 +16,8 @@ let categoryList = [
   let initialState = {
     categories:categoryList,
     activeCategory: [],
+    allCategories:[],
+    filteredCtegories:{} // {name:"food"}
   }
   
   let activatedCategory;
@@ -23,13 +25,16 @@ let categoryList = [
   
   export default function CategoriesReducer(state=initialState, action){
     let {type, payload} = action;
-  
     switch(type){
       case "SWITCH_ACTIVE_CATEGORY":
-      activatedCategory = state.categories.filter(category => category.name === payload)[0];
-      newCategories = state.categories;
-      return {activeCategory: activatedCategory, categories: newCategories};
+        return {...state,filteredCtegories: payload};
+        
+        case 'GET':
+          return  {...state,allCategories:payload};
+         
       default: return state;
-    }
+    
   }
+}
+
   

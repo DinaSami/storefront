@@ -37,7 +37,7 @@ const SimpleCart = () => {
     const state = useSelector(state => state);
     const classes = useStyles();
     const dispatch = useDispatch();
-
+console.log('caaaaaaaaaaaart',state.cart.cart);
     if (state.cart.cart.length > 0) {
         return (
             <>
